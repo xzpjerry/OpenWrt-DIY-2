@@ -91,7 +91,7 @@ jobs:
         id: organize
         run: |
           find openwrt/bin/targets/ -type d -name "packages" | xargs rm -rf {}
-          mv openwrt/.config  openwrt/bin/targets/
+          mv openwrt/.config  openwrt/bin/targets/*/*
           cd openwrt/bin/targets/*/*
           echo "::set-env name=FIRMWARE::$(pwd)"
 
