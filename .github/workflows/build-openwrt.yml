@@ -24,8 +24,6 @@ env:
   SSH_ACTIONS: false
   TZ: Asia/Shanghai
   FILE_NAME: OpenWrt-K2P-firmware
-  RUNNER_DEBUG: true
-  STEP_DEBUG: true
 
 jobs:
   build:
