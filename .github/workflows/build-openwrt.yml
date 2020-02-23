@@ -92,6 +92,8 @@ jobs:
       - name: Prepare artifact
         run: |
           find openwrt/bin/targets/ -type d -name "packages" | xargs rm -rf {}
+          mv openwrt/.config  openwrt/bin/targets/
+          cd openwrt/bin/targets/
           echo "::set-env name=FIRMWARE::$(pwd)"
 
       - name: Upload artifact
@@ -104,7 +106,7 @@ jobs:
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.RELEASES_TOKEN }}
-          file: openwrt/bin/targets/*
+          file: ${{ env.FIRMWARE }}/*
           asset_name: ${{ env.FILE_NAME }}-${{ github.ref }}.zip
           tag: ${{ github.ref }}
           overwrite: true
