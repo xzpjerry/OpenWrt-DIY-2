@@ -106,8 +106,8 @@ jobs:
         uses: svenstaro/upload-release-action@v1-release
         with:
           repo_token: ${{ secrets.RELEASES_TOKEN }}
-          file: ${{ env.FIRMWARE }}/*
-          asset_name: ${{ env.FILE_NAME }}-${{ github.ref }}.zip
+          file: ${{ env.FIRMWARE }}/* # https://www.npmjs.com/package/glob
+          # asset_name: ${{ env.FILE_NAME }}-${{ github.ref }}.zip
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
