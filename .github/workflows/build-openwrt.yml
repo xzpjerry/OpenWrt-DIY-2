@@ -112,4 +112,4 @@ jobs:
           file_glob: true
 
       - name: WeChat notification
-        run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}-${{ github.ref }}_完成
+        run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}编译完成
