@@ -47,7 +47,26 @@ jobs:
           sudo -E apt-get clean
 
       - name: Clone source code # 克隆的源代码
-        run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        id: openwrt
+        run: |
+          git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+          useVersionInfo=$(git show -s --format=medium)
+          echo $useVersionInfo
+          echo "::set-useVersionInfo name=content::$useVersionInfo"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            当前使用版本：
+            ${{ steps.openwrt.useVersionInfo.content }}
+          draft: false
+          prerelease: false
 
       - name: Update feeds
         run: |
