@@ -50,6 +50,7 @@ jobs:
         id: openwrt
         run: |
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+          cd openwrt
           useVersionInfo=$(git show -s --format=medium)
           echo $useVersionInfo
           echo "::set-useVersionInfo name=content::$useVersionInfo"
@@ -58,7 +59,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${{ github.ref }}
           release_name: $(date "+%Y-%m-%d %H:%M:%S")
