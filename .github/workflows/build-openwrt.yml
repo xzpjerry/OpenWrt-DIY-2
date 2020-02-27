@@ -52,8 +52,7 @@ jobs:
         run: |
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
           cd openwrt
-          useVersionInfo=$(git show -s --format=medium)
-          echo $useVersionInfo
+          useVersionInfo=$(git show -s --format="commit:%H<br/>Author:%an<br/>date:%cd")
           echo "::set-env name=useVersionInfo::$useVersionInfo"
           echo "::set-env name=tag::$(date "+%Y-%m-%d %H:%M:%S")"
 
@@ -64,9 +63,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${{ github.ref }}
-          release_name: -${{ env.tag }}
+          release_name: ${{ env.tag }}
           body: |
             当前使用版本：
+            <br/>
             ${{ env.useVersionInfo }}
           draft: false
           prerelease: false
