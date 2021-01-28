@@ -115,7 +115,7 @@ jobs:
           find openwrt/bin/targets/ -type d -name "packages" | xargs rm -rf {}
           mv openwrt/.config  openwrt/bin/targets/*/*
           cd openwrt/bin/targets/*/*
-          echo "FIRMWARE=$(pwd) >> $GITHUB_ENV
+          echo "FIRMWARE=$(pwd)" >> $GITHUB_ENV
 
       - name: Upload artifact
         uses: actions/upload-artifact@master
