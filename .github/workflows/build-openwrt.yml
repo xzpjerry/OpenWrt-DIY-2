@@ -53,8 +53,8 @@ jobs:
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
           cd openwrt
           useVersionInfo=$(git show -s --date=short --format="Author:%an<br/>date:%cd<br/>commit:%s<br/>commit hash:%H")
-          echo "::set-env name=useVersionInfo::$useVersionInfo"
-          echo "::set-env name=DATE::$(date "+%Y-%m-%d %H:%M:%S")"
+          echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
+          echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -115,7 +115,7 @@ jobs:
           find openwrt/bin/targets/ -type d -name "packages" | xargs rm -rf {}
           mv openwrt/.config  openwrt/bin/targets/*/*
           cd openwrt/bin/targets/*/*
-          echo "::set-env name=FIRMWARE::$(pwd)"
+          echo "FIRMWARE=$(pwd) >> $GITHUB_ENV
 
       - name: Upload artifact
         uses: actions/upload-artifact@master
