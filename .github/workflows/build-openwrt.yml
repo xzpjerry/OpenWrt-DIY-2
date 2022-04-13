@@ -24,7 +24,7 @@ env:
   FREE_UP_DISK: false
   SSH_ACTIONS: false
   TZ: Asia/Shanghai
-  FILE_NAME: OpenWrt-K2P-firmware
+  FILE_NAME: OpenWrt-x86_64-firmware
 
 jobs:
   build:
