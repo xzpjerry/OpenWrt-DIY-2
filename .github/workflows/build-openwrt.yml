@@ -11,8 +11,8 @@ on:
     tags:
       # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
       - '*'
-  # schedule:
-  #   - cron: 0 8 * * 5
+  schedule:
+    - cron: 0 8 * * 5
   # watch:
   #   types: [started]
   repository_dispatch:
