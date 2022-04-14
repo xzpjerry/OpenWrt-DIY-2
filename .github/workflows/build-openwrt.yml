@@ -61,7 +61,7 @@ jobs:
           cd openwrt
           useVersionInfo=$(git show -s --date=short --format="Author:%an<br/>date:%cd<br/>commit:%s<br/>commit hash:%H")
           echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
-          echo "uniqueID=$(git show -s --date=short --format="%H")" >> $GITHUB_ENV
+          echo "uniqueID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
           echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
 
       - name: Create Release
