@@ -1,4 +1,4 @@
-[![Build OpenWrt](https://github.com/xzpjerry/OpenWrt-DIY-2/actions/workflows/build-openwrt.yml/badge.svg?branch=master)](https://github.com/xzpjerry/OpenWrt-DIY-2/actions/workflows/build-openwrt.yml)
+[![Build OpenWrt](https://github.com/xzpjerry/OpenWrt-DIY-2/actions/workflows/build-openwrt.yml/badge.svg?event=schedule)](https://github.com/xzpjerry/OpenWrt-DIY-2/actions/workflows/build-openwrt.yml)
 
 
 [Lean's OpenWrt.](https://github.com/coolsnowwolf/lede)
