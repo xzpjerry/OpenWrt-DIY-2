@@ -72,8 +72,8 @@ jobs:
         runs: echo 'Created!' ${{ steps.version.outputs.version }}
 
       - name: cancelling
+        if: ${{ !steps.version.outputs.created }}
         uses: andymckay/cancel-action@0.2
-        if: !steps.version.outputs.created
 
       - name: Create Release
         id: create_release
