@@ -63,16 +63,12 @@ jobs:
           echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
           echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
       
-      - name: 'Create tag if necessary'
+      - name: Create tag if necessary
         id: version
         uses: fregante/daily-version-action@v1
 
-      - name: 'Created?'
-        if: steps.version.outputs.created
-        runs: echo 'Created!' ${{ steps.version.outputs.version }}
-
-      - name: cancelling
-        if: ${{ !steps.version.outputs.created }}
+      - name: Early Abandon
+        if: steps.version.outputs.created == false
         uses: andymckay/cancel-action@0.2
 
       - name: Create Release
