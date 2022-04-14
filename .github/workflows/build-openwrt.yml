@@ -61,6 +61,7 @@ jobs:
           cd openwrt
           useVersionInfo=$(git show -s --date=short --format="Author:%an<br/>date:%cd<br/>commit:%s<br/>commit hash:%H")
           echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
+          echo "uniqueID=$(git show -s --date=short --format="%H")" >> $GITHUB_ENV
           echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
 
       - name: Create Release
@@ -69,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ env.uniqueID }}
           release_name: ${{ env.DATE }}
           body: |
             当前使用版本：
@@ -135,8 +136,7 @@ jobs:
         with:
           repo_token: ${{ secrets.RELEASES_TOKEN }}
           file: ${{ env.FIRMWARE }}/* # https://www.npmjs.com/package/glob
-          # asset_name: ${{ env.FILE_NAME }}-${{ github.ref }}.zip
-          tag: ${{ github.ref }}
+          tag: ${{ env.uniqueID }}
           overwrite: true
           file_glob: true
       
