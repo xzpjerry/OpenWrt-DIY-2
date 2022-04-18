@@ -62,22 +62,15 @@ jobs:
           useVersionInfo=$(git show -s --date=short --format="Author:%an<br/>date:%cd<br/>commit:%s<br/>commit hash:%H")
           echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
           echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
+          echo "uniqueID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       
-      - name: Create tag if necessary
-        id: version
-        uses: fregante/daily-version-action@v1
-
-      - name: Early Abandon
-        if: steps.version.outputs.created == false
-        uses: andymckay/cancel-action@0.2
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
         with:
-          tag_name: ${{ steps.version.outputs.version }}
+          tag_name: ${{ env.uniqueID }}
           release_name: ${{ env.DATE }}
           body: |
             当前使用版本：
@@ -143,7 +136,7 @@ jobs:
         with:
           repo_token: ${{ secrets.RELEASES_TOKEN }}
           file: ${{ env.FIRMWARE }}/* # https://www.npmjs.com/package/glob
-          tag: ${{ steps.version.outputs.version }}
+          tag: ${{ env.uniqueID }}
           overwrite: true
           file_glob: true
       
