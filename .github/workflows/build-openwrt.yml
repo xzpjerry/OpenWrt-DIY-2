@@ -1,10 +1,9 @@
 name: Build OpenWrt x86_64
 
 on:
-  workflow_run:
-    workflows: ["trigger"]
-    types: [completed]
   workflow_dispatch:
+  repository_dispatch:
+    types: [trigger - success]
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
