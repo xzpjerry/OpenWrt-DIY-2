@@ -12,4 +12,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - run: ./check.sh
+      - run: |
+          chmod +x ./check.sh
+          ./check.sh
