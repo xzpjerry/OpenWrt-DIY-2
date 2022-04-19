@@ -1,27 +1,10 @@
 name: Build OpenWrt x86_64
 
 on:
-  # release:
-  #   types: [published]
-  push:
-    #   branches:
-    #     - master
-    #   paths:
-    #     - '.config'
-    tags:
-      # - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-      - '*'
-  schedule:
-    - cron: 0 8 * * 5
-  # watch:
-  #   types: [started]
-  repository_dispatch:
+  workflow_run:
+    workflows: ["trigger"]
+    types: [completed]
   workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: 'false'
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
