@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CLASH_CORE_PATH=package/luci-app-openclash/files/etc/openclash/core
+CLASH_CORE_PATH=package/luci-app-openclash/root/etc/openclash/core
 
 # Modify default IP.
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
