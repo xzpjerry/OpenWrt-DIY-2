@@ -39,12 +39,15 @@ jobs:
       - name: Clone source code # 克隆的源代码
         id: openwrt
         run: |
+          today=$(date "+%Y-%m-%d %H:%M:%S")
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
           cd openwrt
           useVersionInfo=$(git show -s --date=short --format="Author:%an<br/>date:%cd<br/>commit:%s<br/>commit hash:%H")
           echo "useVersionInfo=$useVersionInfo" >> $GITHUB_ENV
-          echo "DATE=$(date "+%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
-          echo "uniqueID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "DATE=$(today)" >> $GITHUB_ENV
+          git_hash = $(git rev-parse --short HEAD)
+          unique_id="${today}_${git_hash}"
+          echo "uniqueID=$(unique_id)" >> $GITHUB_ENV
       
       - name: Create Release
         id: create_release
