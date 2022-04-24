@@ -118,7 +118,7 @@ jobs:
         with:
           repo_token: ${{ secrets.RELEASES_TOKEN }}
           file: ${{ env.FIRMWARE }}/* # https://www.npmjs.com/package/glob
-          tag: ${{ env.uniqueID }}
+          tag: ${{ format('{0}/{1}', env.DATE, env.git_hash) }}
           overwrite: true
           file_glob: true
       
