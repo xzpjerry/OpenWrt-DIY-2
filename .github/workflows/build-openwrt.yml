@@ -52,7 +52,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
         with:
-          tag_name: ${{ env.DATE, env.git_hash }}
+          tag_name: ${{ format('{0}/{1}', env.DATE, env.git_hash }}
           release_name: ${{ env.DATE }}
           body: |
             当前使用版本：
