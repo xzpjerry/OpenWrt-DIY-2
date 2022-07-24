@@ -28,6 +28,8 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
+          chmod +x free_disk_space.sh
+          ./free_disk_space.sh
           docker rmi `docker images -q`
           sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
           sudo -E apt-get update
