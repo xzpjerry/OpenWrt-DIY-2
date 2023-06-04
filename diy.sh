@@ -25,3 +25,38 @@ chmod a+x ${CLASH_CORE_PATH}/clash*
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+
+# Backup the existing .config file
+cp .config .config.bak
+
+# Generate a fresh .config file
+make defconfig
+
+# Compare the fresh .config with the backup
+diff -u .config.bak .config > config.diff
+
+# Check if there are any differences
+if [ -s config.diff ]
+then
+  echo "There are changes in the .config file. Updating..."
+  cp .config .config.bak2  # Backup the fresh .config
+  
+  # Update the existing .config file
+  patch -u .config.bak -i config.diff -o .config
+  
+  # Check if patch was successful
+  if [ $? -eq 0 ]
+  then
+    echo "Update successful"
+  else
+    echo "Update failed. Restoring the backup..."
+    cp .config.bak .config  # Restore the original .config
+    exit 1
+  fi
+else
+  echo "No changes in the .config file"
+fi
+
+# Clean up
+rm .config.bak config.diff .config.bak2
