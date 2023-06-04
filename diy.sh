@@ -60,4 +60,7 @@ fi
 
 # Clean up
 rm .config.bak config.diff
-[ -f .config.bak2 ] && rm .config.bak2  # Remove .config.bak2 only if it exists
+if [ -f .config.bak2 ]
+then
+    rm .config.bak2  # Remove .config.bak2 only if it exists
+fi
