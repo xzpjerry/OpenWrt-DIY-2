@@ -1,8 +1,10 @@
 name: trigger
 
-on:
-  schedule:
-    - cron:  '30 5 * * *'
+# the clash repository has been removed
+# need to figure out what proxies to use
+# on:
+#   schedule:
+#     - cron:  '30 5 * * *'
 
   workflow_dispatch:
 
